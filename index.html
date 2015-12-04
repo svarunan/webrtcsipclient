@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <title>SIP Phone</title>
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body onload="engine.getMediaDevices()">
+  <div>
+    <form id="ua-form">
+      <input type="text" list="did_numbers" name="displayName" id="user" size="10" placeholder="select --"/>
+      <datalist id="did_numbers">
+        <option value="15034066678">
+        <option value="12018446534">
+        <option value="12026184741">
+        <option value="19142959777">
+      </datalist>
+        <br>RegExp:
+      <input type="text" id="reg_expire" size="2">
+        <br>
+      <input type="radio" id="siptrace">siptrace
+        <br>
+      <input type="submit" value="Register" style="margin-left: 30px;">
+    </form>
+  </div>
+  <div id="makeCall" class="makeCall" style="display: none;">
+    <p onclick="engine.genShowHide('makeCall_settings')" class="makeCallSettings">Settings</p>
+    <div id="makeCall_settings" style="display: none;">
+      Mic: <select id="audioSrc">
+      </select>
+      Video: <select id="videoSrc">
+      </select>   
+      <br><br>   
+    </div>
+  	<select id="voice_gateway">
+  		<option value="default">default</option>
+  		<option value="peer">peer</option>
+  		<option value="conference">conf</option>
+  		<option value="flowroute">flowroute</option>  
+  		<option value="multitel">multitel</option>
+  		<option value="vitelity">vitelity</option>
+  		<option value="voicebuy">voicebuy</option>
+  		<option value="getacall">getacall</option>
+  	</select>
+    <br>
+    <input type="text" name="outbound_call" id="outbound_id" value="" size="15" class="numFormat outbound_id">
+    <img class="vicon" id="video_call">
+    <img class="aicon" id="audio_call">
+  </div>
+  <div class="callPanel">
+  <!-- dynamic html comes here -->
+  </div>
+    <audio id="dtmf-audio" src="sounds/dtmf.wav"> </audio>
+  </div>
+  <!-- sipphone html ends here -->
+  <button onclick="engine.genShowHide('sms_form')" style="margin-top: 100px;">SMS</button>
+    <div>
+      <form id="sms_form" style="display: none;">
+        <textarea rows="2" cols="40" id="sms_text" placeholder="Your sms goes here :)" 
+        onkeydown="sms_length()" onblur="sms_length()" onclick="sms_status_clear()"></textarea>
+        <t id="sms_length" maxlength="160">160</t>
+        <p>
+        <input list="sms_numbers" id="sms_src" type="text" class="numFormat" placeholder="your from number">
+        <datalist id="sms_numbers">
+          <option value="16132099777">
+          <option value="19142959777">
+        </datalist>
+        <input type="text" class="numFormat" id="sms_dst" value="" placeholder="your to number">
+        <select id="sms_gateway">
+          <option value="plivo">plivo</option>  
+          <option value="multitel">multitel</option>
+          <option value="vitelity">vitelity</option>
+          <option value="sently">sently</option>
+        </select><br>
+        <input type="submit" style="margin-left: 230px;">
+        <input type="reset">
+        </p>
+      </form>
+      <p id="sms_status"></p>
+    </div>
+  <button onclick="engine.genShowHide('fax_div')" >Fax</button>
+  <div id="fax_div" style="display: none;">
+    <iframe src="img/test.pdf" ></iframe>
+    <br>
+    <form id="fax_send">
+    <input type="text" class="numFormat" id="fax_src" value="17079697279">
+    <input type="text" class="numFormat" id="fax_dst" placeholder="Your destination" class="numFormat">
+    <select id="fax_gateway">
+        <option value="multitel">multitel</option>
+        <option value="babytel">babytel</option>
+        <option value="flowroute">flowroute</option>
+        <option value="voicebuy">voicebuy</option>
+        <option value="getacall">getacall</option>
+    </select>
+    <br>
+    <input type="submit" style="margin-left: 230px;">
+    <input type="reset">
+    </form>
+     <p id="fax_status"></p>
+  </div>
+  <br><br>
+  <button onclick="engine.genShowHide('dps_div')">Document ps</button>
+  <div id="dps_div" style="display: none;">
+    <form id="dps_form" action="" method="post" enctype="multipart/form-data">
+        Upload pdf/jpeg/html: 
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload" name="submit">
+    </form>
+  </div>
+  <br><br>
+  <a target="_blank" href="http://localhost/sipphone/monitering.html">Monitering</a>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="js/conf.js"></script>
+  <script src="lib/socket.io.js"></script>
+  <script src="lib/sip-0.7.0.js"></script>
+  <script src="js/client-io.js"></script>
+  <script src="js/sipjsClient.js"></script>
+  <script src="js/sms.js"></script>
+  <script src="js/fax.js"></script>
+  </body>
+</html>

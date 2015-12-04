@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Monitering</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+</head>
+<body>
+<table id="dashboard_stats" border="1" cellpadding="5" style="text-align: center;white-space: nowrap;">
+	<tr id="online_users">
+		<td>Online users</td>
+		<td>0</td>
+	</tr>
+	<tr id="total_calls">
+		<td>Running calls</td>
+		<td>0</td>
+	</tr>	
+</table>
+<br>
+<table id="SIP_UA" width="300" border="1" cellpadding="5" style="text-align: center;white-space: nowrap;">
+	<tr id="SIP_UA_static">
+		<td>User</td>
+		<td>Callid</td>
+		<td>Server</td>
+		<td>User agent</td>
+	</tr>
+</table>
+<br>
+<table id="channel" width="300" border="1" cellpadding="5" style="text-align: center;white-space: nowrap;">
+	<tr id="channel_static">
+		<td>Caller</td>
+		<td>To</td>
+		<td>UUID</td>
+		<td>Answer state</td>
+		<td>Time</td>
+	</tr>
+</table>
+ <script src="lib/socket.io.js"></script>
+<script src="js/monitering-socket.js"></script>
+<script>
+$(document).ready(function(){
+	var timerIds = {};
+	function callTimer (id,state){
+		var i = 1;
+		console.log(state);
+		if(state == "ringing"){
+			timerIds[id+state] = setInterval(function(){
+							document.getElementById(id).cells[4].innerHTML = i++
+				  		}, 1000);			
+		}else if(state == "early"){
+			this.clear(id,"ringing","");
+			timerIds[id+state] = setInterval(function(){
+							document.getElementById(id).cells[4].innerHTML = i++
+				  		}, 1000);
+		}else if(state == "answered" && timerIds[id+state] == undefined){
+			this.clear(id,"ringing","early");
+			timerIds[id+state] = setInterval(function(){
+							document.getElementById(id).cells[4].innerHTML = i++
+				  		}, 1000);
+		}else if(state == "hangup"){
+			this.clear(id,"ringing","early","answered");
+			delete timerIds[id+"ringing"];
+			delete timerIds[id+"early"];
+			delete timerIds[id+"answered"];
+			// console.info(timerIds);
+		}else{
+			// console.warn(id+' : '+state);
+		}
+		this.clear = function(id,state1,state2,state3){
+			try{
+				if(state1){ clearInterval(timerIds[id+state1]); }
+				if(state2){ clearInterval(timerIds[id+state2]); }
+				if(state3){ clearInterval(timerIds[id+state3]); }
+			}catch(err){
+				console.log(err.message);
+			}
+			return;
+		}
+	}
+
+	function dashboardUpdate(uuid,action){
+		var dash_users = document.getElementById('online_users');
+		var dash_calls = document.getElementById('total_calls');
+		if (action == "register") {
+			dash_users.cells[1].innerHTML = Number(document.querySelectorAll("#SIP_UA tbody tr").length)-1
+		}else if(action == "unregister"){
+			dash_users.cells[1].innerHTML = Number(document.querySelectorAll("#SIP_UA tbody tr").length)-1
+		}else if(action == "ringing"){
+			dash_calls.cells[1].innerHTML = Number(document.querySelectorAll("#channel tbody tr").length)-1
+		}else if(action == "hangup"){
+			dash_calls.cells[1].innerHTML = Number(document.querySelectorAll("#channel tbody tr").length)-1
+		}
+	}
+    monitering_socket.on('ua_register', function (data){
+    	if(document.getElementById(data.callid)){ //update entry
+    		$("#"+data.callid).replaceWith("<tr id="+data.callid+"><td>"+data.user+"</td><td>"+data.callid+"</td><td>"+data.server+"</td><td>"+data.useragent+"</td></tr>");
+    	}else if(document.getElementById(data.callid) == null){ //create entry
+    		$("#SIP_UA tr:first").after("<tr id="+data.callid+"><td>"+data.user+"</td><td>"+data.callid+"</td><td>"+data.server+"</td><td>"+data.useragent+"</td></tr>");
+    		dashboardUpdate(data.callid,'register')
+    	}
+
+    });
+	monitering_socket.on('ua_unregister', function (data){ //remove entry
+		try{
+			$('#'+data.callid).remove();
+			dashboardUpdate(data.callid,'unregister')
+		}catch (err){
+			console.log(err.message);
+		}
+	});
+	monitering_socket.on('channel', function (data){
+		console.log(data);
+		if(document.getElementById(data.call_uuid) == null && data.call_state != "hangup"){ // Create new entry
+			$("#channel tr:first").after("<tr id="+data.call_uuid+"><td>"+data.caller+"</td><td>"+data.called+"</td><td>"+data.call_uuid+"</td><td>"+data.call_state+"</td><td>"+"</td></tr>");
+			var ringstate_id = data.call_uuid+data.call_state;
+			callTimer(data.call_uuid,data.call_state);
+			dashboardUpdate(data.call_uuid,'ringing'); //Create a entry in dashboard
+		}else if(document.getElementById(data.call_uuid) && data.call_state != "hangup"){ // update entry
+			$("#"+data.call_uuid).replaceWith("<tr id="+data.call_uuid+"><td>"+data.caller+"</td><td>"+data.called+"</td><td>"+data.call_uuid+"</td><td>"+data.call_state+"</td><td>"+"</td></tr>");
+			var answerstate_id = data.call_uuid+"ringing";
+			callTimer(data.call_uuid,data.call_state);
+		}else if(document.getElementById(data.call_uuid) && data.call_state == "hangup"){ // remove entry
+			try{
+				callTimer(data.call_uuid,data.call_state);
+				dashboardUpdate(data.call_uuid,'hangup');
+				$('#'+data.call_uuid).remove();
+			}catch (err){
+				console.log(err.message);
+			}
+		}
+	});
+});
+</script>
+</body>
+</html>

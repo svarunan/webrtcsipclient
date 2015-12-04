@@ -1,0 +1,168 @@
+/*** COMPONENT STYLES ***/
+input[type=submit], button.green {
+    background-color: #35f659;
+    border: 0px;
+    height: 2em;
+    cursor: pointer;
+}
+{
+    background-color: #FF0000;
+    border: 0px;
+    height: 2em;
+    cursor: pointer;
+}
+.outbound_id{
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.outboundcall{
+  margin-bottom: 1px;
+  font:-webkit-control;
+}
+
+/*** STRUCTURE STYLES ***/
+h1 {
+    display: block;
+    text-align: center;
+    width: 45%;
+    float: left;
+    padding: 0 4px;
+}
+
+body {
+    background: #f5f7f7;
+    font-family: monospace;
+}
+
+#ua-form {
+    margin-left: 25px;
+}
+
+.media_type{
+  padding-bottom: 5px
+}
+.keypad {
+    background-color: deepskyblue;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    padding: 5px;
+    margin: 1px;
+    text-align: center;
+    width: 20px;
+    opacity: .8;
+    cursor:pointer;
+}
+.dialpad {
+  margin:10px;
+}
+.star{
+    padding-right: 7px;
+    padding-left: 7px;
+}
+
+.status{
+  vertical-align: 10;
+}
+
+/*** FLOW STYLES ***/
+#ua, .started #config-form {
+    display: none;
+}
+
+#config-form, .started #ua {
+    display: block;
+}
+
+#templates {
+    display: none;
+}
+
+
+/*** Old styles ***/
+
+#target {
+  width: 25em;
+}
+
+.hangup, .reject {
+  background-color: red;
+  cursor:pointer;
+}
+.answer, .mute {
+  background-color: #35f659;
+  cursor:pointer
+}
+.call-control {
+  height: 3em;
+}
+
+input {
+  /*border-radius: 2px;
+  border: 0px;
+  height: 2em;*/
+    margin-top: 5px;
+}
+
+input[type=submit] {
+  background-color: #35f659;
+  border: 0px;
+}
+
+input[type=checkbox] {
+  height: auto;
+}
+
+
+.makeCallSettings{
+  cursor: crosshair;
+  color: grey;
+}
+
+.vicon{
+  content:url("../img/video-icon.png");
+  width: 30;
+  height: 30;
+  cursor:pointer;
+  padding-right:10px;
+}
+.aicon{
+  content:url("../img/audio-icon.png");
+  width: 30;
+  cursor:pointer;
+}
+.dicon{
+  content:url("../img/dialer.png");
+  width: 33;
+  cursor:pointer;
+  padding-left: 5;
+}
+.hicon{
+  content:url("../img/hangup.png");
+  width: 40;
+  cursor:pointer;
+  padding-left: 5;
+  vertical-align:sub;
+}
+.txicon{
+  content:url("../img/transfer.png");
+  width: 30;
+  cursor:pointer;
+  padding-left: 5;
+  vertical-align:baseline;
+}
+.muteicon{
+  content:url("../img/mute.png");
+  width: 33;
+  cursor:pointer;
+  padding-left: 5;
+}
+.unmuteicon{
+  content:url("../img/unmute.png");
+  width: 33;
+  cursor:pointer;
+  padding-left: 5;
+}
