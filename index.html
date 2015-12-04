@@ -9,10 +9,6 @@
     <form id="ua-form">
       <input type="text" list="did_numbers" name="displayName" id="user" size="10" placeholder="select --"/>
       <datalist id="did_numbers">
-        <option value="15034066678">
-        <option value="12018446534">
-        <option value="12026184741">
-        <option value="19142959777">
       </datalist>
         <br>RegExp:
       <input type="text" id="reg_expire" size="2">
@@ -32,14 +28,6 @@
       <br><br>   
     </div>
   	<select id="voice_gateway">
-  		<option value="default">default</option>
-  		<option value="peer">peer</option>
-  		<option value="conference">conf</option>
-  		<option value="flowroute">flowroute</option>  
-  		<option value="multitel">multitel</option>
-  		<option value="vitelity">vitelity</option>
-  		<option value="voicebuy">voicebuy</option>
-  		<option value="getacall">getacall</option>
   	</select>
     <br>
     <input type="text" name="outbound_call" id="outbound_id" value="" size="15" class="numFormat outbound_id">
@@ -61,15 +49,9 @@
         <p>
         <input list="sms_numbers" id="sms_src" type="text" class="numFormat" placeholder="your from number">
         <datalist id="sms_numbers">
-          <option value="16132099777">
-          <option value="19142959777">
         </datalist>
         <input type="text" class="numFormat" id="sms_dst" value="" placeholder="your to number">
         <select id="sms_gateway">
-          <option value="plivo">plivo</option>  
-          <option value="multitel">multitel</option>
-          <option value="vitelity">vitelity</option>
-          <option value="sently">sently</option>
         </select><br>
         <input type="submit" style="margin-left: 230px;">
         <input type="reset">
@@ -82,14 +64,9 @@
     <iframe src="img/test.pdf" ></iframe>
     <br>
     <form id="fax_send">
-    <input type="text" class="numFormat" id="fax_src" value="17079697279">
+    <input type="text" class="numFormat" id="fax_src" value="">
     <input type="text" class="numFormat" id="fax_dst" placeholder="Your destination" class="numFormat">
     <select id="fax_gateway">
-        <option value="multitel">multitel</option>
-        <option value="babytel">babytel</option>
-        <option value="flowroute">flowroute</option>
-        <option value="voicebuy">voicebuy</option>
-        <option value="getacall">getacall</option>
     </select>
     <br>
     <input type="submit" style="margin-left: 230px;">
