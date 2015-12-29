@@ -11,14 +11,6 @@ input[type=submit], button.green {
     height: 2em;
     cursor: pointer;
 }
-.outbound_id{
-    margin-top: 10px;
-    padding-top: 10px;
-}
-.outboundcall{
-  margin-bottom: 1px;
-  font:-webkit-control;
-}
 
 /*** STRUCTURE STYLES ***/
 h1 {
@@ -37,7 +29,9 @@ body {
 #ua-form {
     margin-left: 25px;
 }
-
+.outboundcall{
+  height: 0
+}
 .media_type{
   padding-bottom: 5px
 }
@@ -65,7 +59,8 @@ body {
 }
 
 .status{
-  vertical-align: 10;
+  vertical-align: middle;
+  padding-left: 10;
 }
 
 /*** FLOW STYLES ***/
@@ -101,10 +96,9 @@ body {
 }
 
 input {
-  /*border-radius: 2px;
-  border: 0px;
-  height: 2em;*/
-    margin-top: 5px;
+  border-radius: 10px;
+  border-style: inset;
+  margin-top: 5px;
 }
 
 input[type=submit] {
@@ -116,7 +110,18 @@ input[type=checkbox] {
   height: auto;
 }
 
-
+.confHangup{
+  border-radius: 10px;
+    background: red;
+}
+select {
+  background: rgba(54, 191, 20, 0.88);
+  border-radius: 10px;
+}
+/*.confDiv{
+  padding-top: 10;
+  padding-left: 10;  
+}*/
 .makeCallSettings{
   cursor: crosshair;
   color: grey;
@@ -128,41 +133,95 @@ input[type=checkbox] {
   height: 30;
   cursor:pointer;
   padding-right:10px;
+  vertical-align: middle;
 }
 .aicon{
   content:url("../img/audio-icon.png");
   width: 30;
   cursor:pointer;
+  vertical-align: middle;
 }
 .dicon{
   content:url("../img/dialer.png");
   width: 33;
   cursor:pointer;
   padding-left: 5;
+  vertical-align:middle;
 }
 .hicon{
   content:url("../img/hangup.png");
   width: 40;
   cursor:pointer;
   padding-left: 5;
-  vertical-align:sub;
+  vertical-align:middle;
 }
 .txicon{
   content:url("../img/transfer.png");
   width: 30;
   cursor:pointer;
   padding-left: 5;
-  vertical-align:baseline;
+  vertical-align:middle;
 }
 .muteicon{
   content:url("../img/mute.png");
   width: 33;
   cursor:pointer;
   padding-left: 5;
+  vertical-align:middle;
 }
 .unmuteicon{
   content:url("../img/unmute.png");
   width: 33;
   cursor:pointer;
   padding-left: 5;
+  vertical-align:middle;
+}
+.holdicon{
+  content:url("../img/hold.png");
+  width: 33;
+  cursor:pointer;
+  padding-left: 5;
+  vertical-align:middle;
+}
+.unholdicon{
+  content:url("../img/unhold.png");
+  width: 33;
+  cursor:pointer;
+  padding-left: 5;
+  vertical-align:middle;
+}
+.moderator{
+  content:url("../img/moderator.png");
+  width: 47;
+  cursor:pointer;
+  padding-left: 5;
+  vertical-align: middle;
+  padding-top: 20;
+}
+.nonmoderator{
+  content:url("../img/nonmoderator.png");
+  width: 45;
+  cursor:pointer;
+  padding-left: 5;
+  vertical-align: middle;
+  padding-top: 20;
+}
+.confMute{
+  background: rgb(104, 121, 131);
+  border-radius: 10px;
+}
+.confDeaf{
+  background: rgb(104, 121, 131);
+  border-radius: 10px; 
+}
+.confChange{
+  background: rgba(3, 194, 213, 0.88);
+  border-radius: 10px;  
+}
+.blindtx{
+  cursor: pointer;
+  border-radius: 10px;
+}
+.blindtx:hover{
+  background-color: blue;
 }

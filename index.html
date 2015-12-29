@@ -30,7 +30,7 @@
   	<select id="voice_gateway">
   	</select>
     <br>
-    <input type="text" name="outbound_call" id="outbound_id" value="" size="15" class="numFormat outbound_id">
+    <input name="outbound_call" id="outbound_id" value="" size="15" class="numFormat outbound_id">
     <img class="vicon" id="video_call">
     <img class="aicon" id="audio_call">
   </div>
@@ -40,6 +40,7 @@
     <audio id="dtmf-audio" src="sounds/dtmf.wav"> </audio>
   </div>
   <!-- sipphone html ends here -->
+  <br>
   <button onclick="engine.genShowHide('sms_form')" style="margin-top: 100px;">SMS</button>
     <div>
       <form id="sms_form" style="display: none;">
@@ -84,8 +85,8 @@
     </form>
   </div>
   <br><br>
-  <a target="_blank" href="http://localhost/sipphone/monitering.html">Monitering</a>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <a target="_blank" href="monitering.html">Monitering</a>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="js/conf.js"></script>
   <script src="lib/socket.io.js"></script>
   <script src="lib/sip-0.7.0.js"></script>
