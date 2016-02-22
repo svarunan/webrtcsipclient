@@ -5,13 +5,19 @@ input[type=submit], button.green {
     height: 2em;
     cursor: pointer;
 }
-{
+/*{
     background-color: #FF0000;
     border: 0px;
     height: 2em;
     cursor: pointer;
 }
-
+*/
+button {
+    border-radius: 10px;
+    border-color: deepskyblue;
+    border-top-style: hidden;
+    border-bottom-style: hidden;    
+}
 /*** STRUCTURE STYLES ***/
 h1 {
     display: block;
@@ -29,7 +35,7 @@ body {
 #ua-form {
     margin-left: 25px;
 }
-.outboundcall{
+.IOboundcall{
   height: 0
 }
 .media_type{
@@ -118,14 +124,18 @@ select {
   background: rgba(54, 191, 20, 0.88);
   border-radius: 10px;
 }
+
+#makeCall_settings > select{
+  background: rgb(4, 174, 218);
+  border-bottom-left-radius: 1%;
+  border-top-right-radius: 1%;
+  cursor: pointer;
+}
 /*.confDiv{
   padding-top: 10;
   padding-left: 10;  
 }*/
-.makeCallSettings{
-  cursor: crosshair;
-  color: grey;
-}
+
 
 .vicon{
   content:url("../img/video-icon.png");
@@ -225,3 +235,46 @@ select {
 .blindtx:hover{
   background-color: blue;
 }
+.audioInput{
+    background-color: black;
+    border-radius: 13px;
+    padding: 1px;
+    width:10%;
+    display: inline-block;
+    margin-left: 18px;
+}
+.audioInput > div{
+      background-color:  #FF003E;
+    border-radius: 13px;
+    padding: 3px;
+    width:0%
+}
+.audioOutput{
+    background-color: black;
+    border-radius: 13px;
+    padding: 1px;
+    display: inline-block;
+    width:10%;
+    margin-left: 10px;
+}
+.audioOutput > div{
+      background-color:  #09FF00;
+    border-radius: 13px;
+    padding: 3px;
+    width:0%
+}
+#ua-form{
+    border-radius: 10px;
+    width: 100px;
+    border-right-style: outset;
+    border-bottom-style: outset;
+    border-color: lawngreen;
+    text-align: -webkit-center;  
+}
+#makeCall{
+    /*background: dimgray;*/
+    width: 350px;  
+    border-radius: 8px;
+    /*color: white;*/
+    text-align: -webkit-left;    
+  }

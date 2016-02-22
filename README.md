@@ -21,6 +21,9 @@ Top variables:
 	connSummary:
 	Get count of PSTN, PEER, Conference connections on every call actions.
 
+Settings:
+You can change media related options here
+
 Total connections allowed: 3 
 You can change it in engine connLimit
 

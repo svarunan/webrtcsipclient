@@ -2,7 +2,9 @@
   <head>
     <title>SIP Phone</title>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     <link rel="stylesheet" href="css/style.css" />
+    <!-- // <script src="js/adapter.js"></script> -->
   </head>
   <body onload="engine.getMediaDevices()">
   <div>
@@ -19,18 +21,51 @@
     </form>
   </div>
   <div id="makeCall" class="makeCall" style="display: none;">
-    <p onclick="engine.genShowHide('makeCall_settings')" class="makeCallSettings">Settings</p>
+    <p onclick="engine.genShowHide('makeCall_settings')" class="makeCall_settings">Settings</p>
     <div id="makeCall_settings" style="display: none;">
-      Mic: <select id="audioSrc">
+      Mic  : 
+      <select id="audioSrc">
       </select>
-      Video: <select id="videoSrc">
-      </select>   
-      <br><br>   
+      <br>
+      Video  : 
+      <select id="videoSrc">
+      </select> 
+      <br>
+      Call metrics : <input type="checkbox" name="metrics" value="enabled">
+      <br>
+      Video Bandwidth  :
+      <select id="videoBw">
+        <option value="128">128kbps</option>
+        <option value="256">256kbps</option>
+        <option value="512" selected>512kbps</option>
+        <option value="1024">1mbps</option>
+        <option value="2048">2mbps</option>
+      </select>
+      <br>
+      Video Preview  :
+      <select id="videoWindow">
+        <option value='width="320" height="240"' selected>320x240</option>
+        <option value="">auto</option>
+      </select>
+      <form id="codecList" style="display: table-row;">
+      Audio codec  :
+        <input type="checkbox" name="codec" value="AUTO" title="Uncheck this for preferred codecs" checked>auto
+        <input type="checkbox" name="codec" value="OPUS">OPUS
+        <input type="checkbox" name="codec" value="G722">G722
+        <input type="checkbox" name="codec" value="PCMU">PCMU
+        <input type="checkbox" name="codec" value="PCMA">PCMA
+      </form>
+      <form id="confOptions">
+      Conference call with:
+        <input type="checkbox" name="confOptions" value="Peer" disabled checked>Peer
+        <input type="checkbox" name="confOptions" value="PSTN">PSTN
+      </form>       
+      <br>
     </div>
   	<select id="voice_gateway">
   	</select>
     <br>
-    <input name="outbound_call" id="outbound_id" value="" size="15" class="numFormat outbound_id">
+    <input name="outbound_call" id="outbound_id" value="" size="15" class="numFormat outbound_id" placeholder="Enter number here...">
     <img class="vicon" id="video_call">
     <img class="aicon" id="audio_call">
   </div>
@@ -65,12 +100,13 @@
     <iframe src="img/test.pdf" ></iframe>
     <br>
     <form id="fax_send">
-    <input type="text" class="numFormat" id="fax_src" value="">
+    <input type="text" class="numFormat" id="fax_src" value="" placeholder="Your src">
     <input type="text" class="numFormat" id="fax_dst" placeholder="Your destination" class="numFormat">
     <select id="fax_gateway">
     </select>
     <br>
-    <input type="submit" style="margin-left: 230px;">
+    <input type="text" id="fax_file" placeholder="Other.tiff">
+    <input type="submit">
     <input type="reset">
     </form>
      <p id="fax_status"></p>
@@ -86,11 +122,15 @@
   </div>
   <br><br>
   <a target="_blank" href="monitering.html">Monitering</a>
+  <p>
+    <canvas></canvas>  
+  </p>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="js/conf.js"></script>
   <script src="lib/socket.io.js"></script>
   <script src="lib/sip-0.7.0.js"></script>
   <script src="js/client-io.js"></script>
+  <script src="js/engine.js"></script>
   <script src="js/sipjsClient.js"></script>
   <script src="js/sms.js"></script>
   <script src="js/fax.js"></script>
